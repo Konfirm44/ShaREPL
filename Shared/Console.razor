@@ -1,0 +1,72 @@
+﻿<style>
+    .console {
+    }
+
+    .console-input {
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .console-input input {
+        width: 100%;
+        border: none;
+        outline: none;
+        font-family: monospace;
+        background-color: transparent;
+    }
+
+    .console-output {
+        white-space: pre-wrap;
+        font-family: monospace;
+    }
+</style>
+
+<div class="console" @onclick="Click">
+    <div class="console-output">
+        @foreach (var line in Output)
+        {
+            @line
+        }
+    </div>
+    <div class="console-input">
+        <input type="text" @ref="inputRef" @bind="input" @onkeydown="OnEnterLocal" @oninput="OnInputLocal" />
+    </div>
+</div>
+
+@code {
+    private ElementReference inputRef;
+
+    private string input = "";
+
+    [Parameter] [EditorRequired]
+    public IReadOnlyList<string> Output { get; init; } = null!;
+
+    [Parameter] [EditorRequired]
+    public EventCallback<KeyboardEventArgs> OnEnter { get; init; }
+
+    [Parameter] [EditorRequired]
+    public EventCallback<ChangeEventArgs> OnInput { get; init; }
+
+    [Parameter] [EditorRequired]
+    public Func<string> FetchInput { get; init; } = null!;
+
+    private async Task Click()
+    {
+        await inputRef.FocusAsync();
+        input = FetchInput();
+    }
+
+    private void OnInputLocal(ChangeEventArgs e)
+    {
+        OnInput.InvokeAsync(e);
+        input = FetchInput();
+    }
+
+    private void OnEnterLocal(KeyboardEventArgs e)
+    {
+        OnEnter.InvokeAsync(e);
+        input = FetchInput();
+    }
+
+    public void Update() => StateHasChanged();
+}

@@ -1,5 +1,41 @@
-﻿@page "/{guid:guid}"
+﻿@page "/{Guid:guid}"
+@inject SharedEnvironmentProvider provider
+
+@if (env is null)
+{
+    <p>
+        Loading...
+    </p>
+}
+else
+{
+    <Console OnEnter="@OnEnter" OnInput="@OnInput" Output="env.Output" FetchInput="FetchInput"></Console>
+}
 
 @code {
-    Guid guid { get; set; }
+    [Parameter]
+    public Guid Guid { get; set; }
+
+    Shared.Console? console;
+
+    private SharedEnvironment? env;
+
+    protected override void OnParametersSet()
+    {
+        env = provider.GetSharedEnvironment(Guid);
+        env.Update += (_, _) => InvokeAsync(Update);
+    }
+
+    void OnEnter(KeyboardEventArgs e) => env?.OnEnter(e);
+
+    void OnInput(ChangeEventArgs e) => env?.OnInput(e);
+
+    string FetchInput() => env?.Input ?? "";
+
+    void Update()
+    {
+        StateHasChanged();
+        console?.Update();
+    }
+
 }
