@@ -39,9 +39,9 @@
 </div>
 
 @code {
-    private ElementReference inputRef;
+    ElementReference inputRef;
 
-    private string input = "";
+    string input = "";
 
     [Parameter] [EditorRequired]
     public IReadOnlyList<string> Output { get; init; } = null!;
@@ -52,26 +52,32 @@
     [Parameter] [EditorRequired]
     public EventCallback<ChangeEventArgs> OnInput { get; init; }
 
-    [Parameter] [EditorRequired]
-    public Func<string> FetchInput { get; init; } = null!;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await inputRef.FocusAsync();
+        }
+    }
 
-    private async Task Click()
+    async Task Click()
     {
         await inputRef.FocusAsync();
-        input = FetchInput();
     }
 
-    private async Task OnInputLocal(ChangeEventArgs e)
+    async Task OnInputLocal(ChangeEventArgs e)
     {
         await OnInput.InvokeAsync(e);
-        input = FetchInput();
     }
 
-    private async Task OnEnterLocal(KeyboardEventArgs e)
+    async Task OnEnterLocal(KeyboardEventArgs e)
     {
         await OnEnter.InvokeAsync(e);
-        input = FetchInput();
     }
 
-    public void Update() => StateHasChanged();
+    public void Update(string inputValue)
+    {
+        input = inputValue;
+        StateHasChanged();
+    }
 }

@@ -14,7 +14,7 @@ public class SharedEnvironment
     public void OnInput(ChangeEventArgs e)
     {
         Input = e.Value?.ToString() ?? "";
-        Update?.Invoke(default, EventArgs.Empty);
+        Update?.Invoke(this, EventArgs.Empty);
     }
 
     public void OnEnter(KeyboardEventArgs e)
@@ -25,7 +25,7 @@ public class SharedEnvironment
             InputArchive.Add(Input); 
             (Output as List<string>)!.Add(Input);
             Input = "";
-            Update?.Invoke(default, EventArgs.Empty);
+            Update?.Invoke(this, EventArgs.Empty);
         }
     }
 
