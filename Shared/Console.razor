@@ -1,5 +1,10 @@
 ﻿<style>
-    .console {
+    body {
+        height: 100vh;
+    }
+
+    .page, article.content, .console {
+        height: 100%;
     }
 
     .console-input {
@@ -56,15 +61,15 @@
         input = FetchInput();
     }
 
-    private void OnInputLocal(ChangeEventArgs e)
+    private async Task OnInputLocal(ChangeEventArgs e)
     {
-        OnInput.InvokeAsync(e);
+        await OnInput.InvokeAsync(e);
         input = FetchInput();
     }
 
-    private void OnEnterLocal(KeyboardEventArgs e)
+    private async Task OnEnterLocal(KeyboardEventArgs e)
     {
-        OnEnter.InvokeAsync(e);
+        await OnEnter.InvokeAsync(e);
         input = FetchInput();
     }
 

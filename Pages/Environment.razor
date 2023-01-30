@@ -9,7 +9,7 @@
 }
 else
 {
-    <Console OnEnter="@OnEnter" OnInput="@OnInput" Output="env.Output" FetchInput="FetchInput"></Console>
+    <Console OnEnter="OnEnter" OnInput="OnInput" Output="env.Output" FetchInput="FetchInput"></Console>
 }
 
 @code {
@@ -18,7 +18,7 @@ else
 
     Shared.Console? console;
 
-    private SharedEnvironment? env;
+    SharedEnvironment? env;
 
     protected override void OnParametersSet()
     {
