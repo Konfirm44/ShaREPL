@@ -45,7 +45,7 @@ public class SharedEnvironment
             }
             var input = Input;
             Input = "";
-            InputArchive.Add($"{Prompt}{input}");
+            InputArchive.Add(input);
             AddToOutput($"{Prompt}{input}");
             Update?.Invoke(this, EventArgs.Empty);
 

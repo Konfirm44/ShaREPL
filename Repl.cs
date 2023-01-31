@@ -11,7 +11,13 @@ public class Repl
 
     public async Task Init()
     {
-        var opt = ScriptOptions.Default.WithImports("System", "System.Math", "System.Text");
+        var opt = ScriptOptions.Default.WithImports(
+            "System",
+            "System.Math",
+            "System.Collections.Generic"
+            //"System.Linq"
+            //"System.Text"
+            );
         _state = await CSharpScript.RunAsync("\"hello world\"", opt);
     }
 
@@ -23,7 +29,7 @@ public class Repl
             _state = await _state!.ContinueWithAsync(input);
             result = _state.ReturnValue?.ToString() ?? "";
         }
-        catch (CompilationErrorException ex)
+        catch (Exception ex)
         {
             result = ex.Message;
         }
