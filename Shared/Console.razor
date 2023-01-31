@@ -57,6 +57,7 @@
         if (firstRender)
         {
             await inputRef.FocusAsync();
+            await inputRef.ScrollToEndAsync();
         }
     }
 
@@ -73,6 +74,7 @@
     async Task OnKeyDownLocal(KeyboardEventArgs e)
     {
         await OnKeyDown.InvokeAsync(e);
+        await inputRef.ScrollToEndAsync();
     }
 
     public void Update(string inputValue)

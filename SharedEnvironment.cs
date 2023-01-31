@@ -37,7 +37,11 @@ public class SharedEnvironment
                await _repl.Init();
             }
 
-            var input = Input + "\n";
+            if (Input.Last() is not '\n')
+            {
+                Input += "\n";
+            }
+            var input = Input;
             Input = "";
             InputArchive.Add(input);
             AddToOutput(input);
