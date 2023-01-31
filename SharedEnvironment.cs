@@ -7,15 +7,17 @@ public class SharedEnvironment
 {
     public Guid Guid { get; init; } = Guid.NewGuid();
 
-    private List<string> InputArchive { get; init; } = new();
-    public IReadOnlyList<string> Output { get; init; } = new List<string>();
-    public string Input { get; set; } = "";
+    public List<string> InputArchive { get; init; } = new();
 
-    private readonly Repl _repl = new();
+    public IReadOnlyList<string> Output { get; init; } = new List<string>();
+
+    public string Input { get; set; } = "";
 
     public event EventHandler? Update;
 
-    public SharedEnvironment() 
+    private readonly Repl _repl = new();
+
+    public SharedEnvironment()
     {
         AddToOutput("Enter C# code:\n");
     }

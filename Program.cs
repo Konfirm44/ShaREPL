@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ShaREPL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddDbContextFactory<Db>(opt => 
+    opt.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ShaREPL;Integrated Security=True"));
 builder.Services.AddSingleton<SharedEnvironmentProvider>();
 
 var app = builder.Build();

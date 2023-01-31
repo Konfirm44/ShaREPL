@@ -7,9 +7,9 @@
 </div>
 
 @code {
-    void Launch()
+    async Task Launch()
     {
-        var se = provider.GetSharedEnvironment();
+        var se = await provider.Get();
         nav.NavigateTo(se.Guid.ToString());
     }
 }

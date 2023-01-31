@@ -5,14 +5,14 @@ namespace ShaREPL;
 
 public class Repl
 {
-    ScriptState<object>? state;
+    ScriptState<object>? _state;
 
-    public bool HasState { get => state is not null; }
+    public bool HasState { get => _state is not null; }
 
     public async Task Init()
     {
         var opt = ScriptOptions.Default.WithImports("System", "System.Math");
-        state = await CSharpScript.RunAsync("\"hello world\"", opt);
+        _state = await CSharpScript.RunAsync("\"hello world\"", opt);
     }
 
     public async Task<string> Evaluate(string input)
@@ -20,13 +20,12 @@ public class Repl
         var result = "";
         try
         {
-            state = await state!.ContinueWithAsync(input);
-            result = state.ReturnValue?.ToString() ?? "";
+            _state = await _state!.ContinueWithAsync(input);
+            result = _state.ReturnValue?.ToString() ?? "";
         }
         catch (CompilationErrorException ex)
         {
             result = ex.Message;
-            //state = null;
         }
         return result;
     }

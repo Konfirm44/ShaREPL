@@ -20,13 +20,20 @@ else
 
     SharedEnvironment? env;
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
-        env = provider.GetSharedEnvironment(Guid);
+        env = await provider.Get(Guid);
         env.Update += async (_, _) => await InvokeAsync(Update);
     }
 
-    void OnKeyDown(KeyboardEventArgs e) => env?.OnKeyDown(e);
+    async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        env?.OnKeyDown(e);
+        if (env is not null)
+        {
+            await provider.OnKeyDown(e, env);
+        }
+    }
 
     void OnInput(ChangeEventArgs e) => env?.OnInput(e);
 
@@ -34,5 +41,4 @@ else
     {
         console!.Update(env!.Input);
     }
-
 }
