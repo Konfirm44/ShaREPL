@@ -5,6 +5,8 @@ namespace ShaREPL;
 
 public class SharedEnvironment
 {
+    public const string Prompt = "> ";
+
     public Guid Guid { get; init; } = Guid.NewGuid();
 
     public List<string> InputArchive { get; init; } = new();
@@ -43,8 +45,8 @@ public class SharedEnvironment
             }
             var input = Input;
             Input = "";
-            InputArchive.Add(input);
-            AddToOutput(input);
+            InputArchive.Add($"{Prompt}{input}");
+            AddToOutput($"{Prompt}{input}");
             Update?.Invoke(this, EventArgs.Empty);
 
             var output = await ProcessLine(input);

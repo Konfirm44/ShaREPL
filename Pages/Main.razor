@@ -11,7 +11,7 @@
 else
 {
     <Console OnKeyDown="OnKeyDown" OnInput="OnInput" Output="env.Output" @ref="console"></Console>
-    <FloatingButton OnClick="OnClick">Download log</FloatingButton>
+    <FloatingButton OnClick="DownloadFile">Download log</FloatingButton>
 }
 
 @code {
@@ -42,11 +42,6 @@ else
     void Update()
     {
         console!.Update(env!.Input);
-    }
-
-    async Task OnClick()
-    {
-        await DownloadFile();
     }
 
     async Task DownloadFile()

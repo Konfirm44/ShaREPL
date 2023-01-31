@@ -34,6 +34,7 @@
         }
     </div>
     <div class="console-input">
+        @SharedEnvironment.Prompt
         <input type="text" @ref="inputRef" @bind="input" @onkeydown="OnKeyDownLocal" @oninput="OnInputLocal" />
     </div>
 </div>
