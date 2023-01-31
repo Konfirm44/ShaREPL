@@ -9,7 +9,7 @@
 }
 else
 {
-    <Console OnEnter="OnEnter" OnInput="OnInput" Output="env.Output" @ref="console"></Console>
+    <Console OnKeyDown="OnKeyDown" OnInput="OnInput" Output="env.Output" @ref="console"></Console>
 }
 
 @code {
@@ -26,7 +26,7 @@ else
         env.Update += async (_, _) => await InvokeAsync(Update);
     }
 
-    void OnEnter(KeyboardEventArgs e) => env?.OnEnter(e);
+    void OnKeyDown(KeyboardEventArgs e) => env?.OnKeyDown(e);
 
     void OnInput(ChangeEventArgs e) => env?.OnInput(e);
 

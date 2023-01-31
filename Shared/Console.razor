@@ -34,7 +34,7 @@
         }
     </div>
     <div class="console-input">
-        <input type="text" @ref="inputRef" @bind="input" @onkeydown="OnEnterLocal" @oninput="OnInputLocal" />
+        <input type="text" @ref="inputRef" @bind="input" @onkeydown="OnKeyDownLocal" @oninput="OnInputLocal" />
     </div>
 </div>
 
@@ -47,7 +47,7 @@
     public IReadOnlyList<string> Output { get; init; } = null!;
 
     [Parameter] [EditorRequired]
-    public EventCallback<KeyboardEventArgs> OnEnter { get; init; }
+    public EventCallback<KeyboardEventArgs> OnKeyDown { get; init; }
 
     [Parameter] [EditorRequired]
     public EventCallback<ChangeEventArgs> OnInput { get; init; }
@@ -70,9 +70,9 @@
         await OnInput.InvokeAsync(e);
     }
 
-    async Task OnEnterLocal(KeyboardEventArgs e)
+    async Task OnKeyDownLocal(KeyboardEventArgs e)
     {
-        await OnEnter.InvokeAsync(e);
+        await OnKeyDown.InvokeAsync(e);
     }
 
     public void Update(string inputValue)

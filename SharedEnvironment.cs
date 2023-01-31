@@ -26,7 +26,7 @@ public class SharedEnvironment
         Update?.Invoke(this, EventArgs.Empty);
     }
 
-    public async Task OnEnter(KeyboardEventArgs e)
+    public async Task OnKeyDown(KeyboardEventArgs e)
     {
         if (e.Key == "Enter")
         {
@@ -42,9 +42,16 @@ public class SharedEnvironment
             Update?.Invoke(this, EventArgs.Empty);
 
             var output = await ProcessLine(input);
-            AddToOutput(output + "\n");
+            if (output.Length != 0)
+            {
+                AddToOutput(output + "\n");
+            }
             
             Update?.Invoke(this, EventArgs.Empty);
+        }
+        if (e.Key == "ArrowUp")
+        {
+            OnInput(new ChangeEventArgs { Value = InputArchive.Last()});
         }
     }
 

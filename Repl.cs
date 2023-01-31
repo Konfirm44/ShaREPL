@@ -21,7 +21,7 @@ public class Repl
         try
         {
             state = await state!.ContinueWithAsync(input);
-            result = state.ReturnValue?.ToString() ?? "no return value";
+            result = state.ReturnValue?.ToString() ?? "";
         }
         catch (CompilationErrorException ex)
         {
