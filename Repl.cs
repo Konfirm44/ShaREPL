@@ -11,12 +11,18 @@ public class Repl
 
     public async Task Init()
     {
-        var opt = ScriptOptions.Default.WithImports(
+        var opt = ScriptOptions.Default
+            .WithReferences(
+            typeof(System.Linq.Enumerable).Assembly,
+            typeof(System.Text.Json.JsonSerializer).Assembly
+            )
+            .WithImports(
             "System",
             "System.Math",
-            "System.Collections.Generic"
-            //"System.Linq"
-            //"System.Text"
+            "System.Collections.Generic",
+            "System.Linq",
+            "System.Text",
+            "System.Text.Json"
             );
         _state = await CSharpScript.RunAsync("\"hello world\"", opt);
     }
