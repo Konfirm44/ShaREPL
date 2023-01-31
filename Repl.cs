@@ -11,7 +11,7 @@ public class Repl
 
     public async Task Init()
     {
-        var opt = ScriptOptions.Default.WithImports("System", "System.Math");
+        var opt = ScriptOptions.Default.WithImports("System", "System.Math", "System.Text");
         _state = await CSharpScript.RunAsync("\"hello world\"", opt);
     }
 

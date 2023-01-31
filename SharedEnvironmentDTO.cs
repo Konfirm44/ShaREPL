@@ -31,4 +31,9 @@ public class SharedEnvironmentDTO
         return (Guid, ia!, oa!);
     }
 
+    public string ToJson()
+    {
+        return JsonSerializer.Serialize(this);
+    }
+
 }

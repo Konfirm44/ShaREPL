@@ -1,5 +1,6 @@
 ﻿@page "/{Guid:guid}"
 @inject SharedEnvironmentProvider provider
+@inject IJSRuntime JS
 
 @if (env is null)
 {
@@ -10,6 +11,7 @@
 else
 {
     <Console OnKeyDown="OnKeyDown" OnInput="OnInput" Output="env.Output" @ref="console"></Console>
+    <FloatingButton OnClick="OnClick">Download log</FloatingButton>
 }
 
 @code {
@@ -40,5 +42,22 @@ else
     void Update()
     {
         console!.Update(env!.Input);
+    }
+
+    async Task OnClick()
+    {
+        await DownloadFile();
+    }
+
+    async Task DownloadFile()
+    {
+        var dto = new SharedEnvironmentDTO(env!).ToJson();
+        var bytes = Encoding.UTF8.GetBytes(dto);
+        var fileStream = new MemoryStream(bytes);
+        var fileName = "log.json";
+
+        using var streamRef = new DotNetStreamReference(stream: fileStream);
+
+        await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
     }
 }
