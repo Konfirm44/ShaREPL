@@ -21,7 +21,7 @@ public class SharedEnvironment
 
     public SharedEnvironment()
     {
-        AddToOutput("Enter C# code:\n");
+        //AddToOutput("Enter C# code:\n");
     }
 
     public void OnInput(ChangeEventArgs e)

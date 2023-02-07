@@ -36,4 +36,12 @@ public class SharedEnvironmentDTO
         return JsonSerializer.Serialize(this);
     }
 
+    public override string ToString()
+    {
+        var oa = JsonSerializer.Deserialize<List<string>>(OutputArchive);
+        var str = string.Join("", oa!);
+
+        return $"{Guid}\n\n{str}";
+    }
+
 }

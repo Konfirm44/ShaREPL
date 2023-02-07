@@ -46,10 +46,10 @@ else
 
     async Task DownloadFile()
     {
-        var dto = new SharedEnvironmentDTO(env!).ToJson();
+        var dto = new SharedEnvironmentDTO(env!).ToString();
         var bytes = Encoding.UTF8.GetBytes(dto);
         var fileStream = new MemoryStream(bytes);
-        var fileName = "log.json";
+        var fileName = "log.txt";
 
         using var streamRef = new DotNetStreamReference(stream: fileStream);
 
