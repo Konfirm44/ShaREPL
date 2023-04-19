@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ShaREPL;
+namespace ShaREPL.Core;
 
 public class Db : DbContext
 {
     public DbSet<SharedEnvironmentDTO> Environments { get; set; }
 
-	public Db(DbContextOptions<Db> options) : base(options)
+    public Db(DbContextOptions<Db> options) : base(options)
     {
 
-	}
+    }
 
     public async Task<SharedEnvironment?> FirstOrNull(Guid guid)
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
-namespace ShaREPL;
+namespace ShaREPL.Core;
 
 public class SharedEnvironment
 {
@@ -21,7 +21,7 @@ public class SharedEnvironment
 
     public SharedEnvironment()
     {
-        //AddToOutput("Enter C# code:\n");
+        AddToOutput("Enter C# code:\n");
     }
 
     public void OnInput(ChangeEventArgs e)
@@ -36,7 +36,7 @@ public class SharedEnvironment
         {
             if (!_repl.HasState)
             {
-               await _repl.Init();
+                await _repl.Init();
             }
 
             if (Input.Last() is not '\n')
@@ -54,12 +54,12 @@ public class SharedEnvironment
             {
                 AddToOutput(output + "\n");
             }
-            
+
             Update?.Invoke(this, EventArgs.Empty);
         }
         if (e.Key == "ArrowUp")
         {
-            OnInput(new ChangeEventArgs { Value = InputArchive.Last()});
+            OnInput(new ChangeEventArgs { Value = InputArchive.Last() });
         }
     }
 

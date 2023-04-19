@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
-namespace ShaREPL;
+namespace ShaREPL.Core;
 
 public class Repl
 {
@@ -13,7 +13,7 @@ public class Repl
     {
         var opt = ScriptOptions.Default
             .WithReferences(
-            typeof(System.Linq.Enumerable).Assembly,
+            typeof(Enumerable).Assembly,
             typeof(System.Text.Json.JsonSerializer).Assembly
             )
             .WithImports(

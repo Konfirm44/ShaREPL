@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 
-namespace ShaREPL;
+namespace ShaREPL.Core;
 
 public class SharedEnvironmentDTO
 {
@@ -34,14 +34,6 @@ public class SharedEnvironmentDTO
     public string ToJson()
     {
         return JsonSerializer.Serialize(this);
-    }
-
-    public override string ToString()
-    {
-        var oa = JsonSerializer.Deserialize<List<string>>(OutputArchive);
-        var str = string.Join("", oa!);
-
-        return $"{Guid}\n\n{str}";
     }
 
 }

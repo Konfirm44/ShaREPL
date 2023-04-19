@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ShaREPL;
+using ShaREPL.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 

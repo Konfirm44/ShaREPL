@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 
-namespace ShaREPL;
+namespace ShaREPL.Core;
 
 public class SharedEnvironmentProvider
 {
