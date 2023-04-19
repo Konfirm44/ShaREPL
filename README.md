@@ -1,6 +1,9 @@
 # ShaREPL
 A Blazor Server app for sharing C# [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) environments across the web.
 
+<img src="docs/img.png" width="359" height="249">
+
+
 ## Setup
 
 By default, the app uses SQL Server LocalDB (which comes bundled with Visual Studio) for data storage - 
