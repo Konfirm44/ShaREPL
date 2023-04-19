@@ -24,6 +24,14 @@ public class SharedEnvironment
         AddToOutput("Enter C# code:\n");
     }
 
+    public async Task Init()
+    {
+        if (!_repl.HasState)
+        {
+            await _repl.Init();
+        }
+    }
+
     public void OnInput(ChangeEventArgs e)
     {
         Input = e.Value?.ToString() ?? "";
@@ -34,11 +42,6 @@ public class SharedEnvironment
     {
         if (e.Key == "Enter")
         {
-            if (!_repl.HasState)
-            {
-                await _repl.Init();
-            }
-
             if (Input.Last() is not '\n')
             {
                 Input += "\n";

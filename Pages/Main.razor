@@ -26,6 +26,7 @@ else
     {
         env = await provider.Get(Guid);
         env.Update += async (_, _) => await InvokeAsync(Update);
+        await env.Init();
     }
 
     async Task OnKeyDown(KeyboardEventArgs e)
@@ -46,11 +47,11 @@ else
 
     async Task DownloadFile()
     {
-        var dto = new SharedEnvironmentDTO(env!).ToString();
+        var dto = new SharedEnvironmentDTO(env!).ToJson();
         var bytes = Encoding.UTF8.GetBytes(dto);
         var fileStream = new MemoryStream(bytes);
         var fileName = "log.txt";
-
+        // TODO: fix the log
         using var streamRef = new DotNetStreamReference(stream: fileStream);
 
         await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);

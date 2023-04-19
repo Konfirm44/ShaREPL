@@ -13,8 +13,8 @@ public class Repl
     {
         var opt = ScriptOptions.Default
             .WithReferences(
-            typeof(Enumerable).Assembly,
-            typeof(System.Text.Json.JsonSerializer).Assembly
+                typeof(Enumerable).Assembly,
+                typeof(System.Text.Json.JsonSerializer).Assembly
             )
             .WithImports(
             "System",
@@ -24,7 +24,8 @@ public class Repl
             "System.Text",
             "System.Text.Json"
             );
-        _state = await CSharpScript.RunAsync("\"hello world\"", opt);
+        var print = @"string print(object o) => JsonSerializer.Serialize(o);";
+        _state = await CSharpScript.RunAsync(print, opt);
     }
 
     public async Task<string> Evaluate(string input)
