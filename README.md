@@ -30,7 +30,7 @@ The app offers an interactive C# environment with some of the most popular names
 - System.Text.Json,
 
 as well as a predefined `print()` function. The **arrow up** key can be used to put the last inputted line into 
-the input field, allowing for quick corrections. A session archive can be downloaded with the **Download** button.
+the input field, allowing for quick corrections. A session archive can be downloaded with the **Download log** button.
 
 There is no mechanism in place to moderate access to the sesssions - anyone can join if they happen to 
 know the session GUID.
