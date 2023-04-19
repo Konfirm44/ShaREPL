@@ -50,7 +50,7 @@ else
         var dto = new SharedEnvironmentDTO(env!).ToJson();
         var bytes = Encoding.UTF8.GetBytes(dto);
         var fileStream = new MemoryStream(bytes);
-        var fileName = "log.txt";
+        var fileName = "log.json";
         // TODO: fix the log
         using var streamRef = new DotNetStreamReference(stream: fileStream);
 
