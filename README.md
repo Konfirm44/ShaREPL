@@ -18,8 +18,8 @@ Launch the app through Visual Studio or via `dotnet run` and open the link prese
 ## Features
 
 Use the **Launch** button to open a new REPL session. Each session is identified by a GUID in the last 
-segment of the URL, which allows multiple users to join and use the same execution environment with full cross-
-synchronization - just share the address. The input & output of a session is persisted in the database, which 
+segment of the URL, which allows multiple users to join and use the same execution environment with full cross-synchronization, 
+just share the address. The input & output of a session is persisted in the database, which 
 prevents the users from loosing their data should they accidentally leave the app; unfortunately, the execution 
 state is not automatically restored, so the user may need to copy-paste their code.
 
@@ -35,5 +35,4 @@ The app offers an interactive C# environment with some of the most popular names
 as well as a predefined `print()` function. The **arrow up** key can be used to put the last inputted line into 
 the input field, allowing for quick corrections. A session archive can be downloaded with the **Download log** button.
 
-There is no mechanism in place to moderate access to the sesssions - anyone can join if they happen to 
-know the session GUID.
+There is no mechanism in place to moderate access to the sesssions - anyone can join if they have the session GUID.
